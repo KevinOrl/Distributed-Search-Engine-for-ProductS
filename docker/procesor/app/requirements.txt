@@ -1,0 +1,6 @@
+pika
+pymysql
+elasticsearch
+beautifulsoup4
+boto3
+requests

@@ -1,0 +1,4 @@
+pika
+mariadb
+boto3
+pymysql

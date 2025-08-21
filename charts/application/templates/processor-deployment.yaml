@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: processor
+  namespace: default
+  labels:
+    app: processor
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: processor
+  template:
+    metadata:
+      labels:
+        app: processor
+    spec:
+      containers:
+        - name: processor
+          image: orlkasesina06/processor
+          env:
+            - name: KEY
+              value: '############'
+            - name: ACCESS_KEY
+              value: ############
+            - name: SECRET_KEY
+              value: ############
+            - name: BUCKET
+              value: 2025-01-ic4302
+            - name: RABBITMQ
+              value: databases-rabbitmq
+            - name: RABBITMQ_QUEUE
+              value: ProcessedDocuments
+            - name: RABBITMQ_USER
+              value: user
+            - name: RABBITMQ_PASS
+              value: G5CmGI74M1tIL9SN
+            - name: MARIADB
+              value: databases-mariadb
+            - name: MARIADB_TABLE
+              value: objects
+            - name: MARIADB_DB
+              value: control
+            - name: MARIADB_USER
+              value: root
+            - name: MARIADB_PASS
+              value: Dlu2J4fTpx
+            - name: ELASTICSEARCH
+              value: http://ic4302-es-http:9200/
+            - name: ELASTICSEARCH_USER
+              value: elastic
+            - name: ELASTICSEARCH_PASS
+              value: eC9iv59Flk4JDp6I1V22Qc78
+            - name: ELASTICSEARCH_INDEX
+              value: documents
+            - name: ELASTICSEARCH_INDEX_DST
+              value: processed_documents
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

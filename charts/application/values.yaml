@@ -1,0 +1,17 @@
+config:
+  docker_registry: axellv142
+  access_key: ############
+  secret_key: ############
+  bucket: ############
+  producer:
+    replicas: 1
+    name: s3-spider
+    image: s3-spider
+  consumer:
+    replicas: 1
+    name: downloader
+    image: downloader
+  processor:
+    replicas: 1
+    name: processor
+    image: processor
