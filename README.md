@@ -1,4 +1,4 @@
-Distributed Search Engine for Online Products
+Distributed Search Engine for Products
 
 This project implements a distributed system designed to search and analyze products from online stores such as Amazon and eBay, simulating real user behavior. The system automates data collection, storage, processing, and visualization through a microservices architecture deployed with Docker containers and Kubernetes orchestration.
 
